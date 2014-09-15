@@ -1,0 +1,52 @@
+<div>
+  <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3>Weapons</h3></div>
+    <!-- Table -->
+    <table class="table table-striped">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Rarity</th>
+        <th>Level</th>
+        <th>Type/Subtype</th>
+        <th>Buy Price</th>
+        <th>Sell Price</th>
+        <th>Profit Margin</th>
+      </tr>
+      <tr ng-repeat="weapon in weapons">
+        <td><img src="{{weapon.img}}"></td>
+        <td><a ng-href="#/weapons/{{weapon.data_id}}">{{weapon.name}}</a></td>
+        <td>
+          <span ng-repeat="rare in rares">
+            <span ng-if="weapon.rarity == rare.rare_id">
+              {{rare.name}}
+            </span>
+          </span>
+        </td>
+        <td>{{weapon.restriction_level}}</td>
+        <td>
+          <span ng-repeat="type in types">
+            <span ng-if="weapon.type_id == type.id">
+              {{type.name}} /
+            </span>
+          </span>
+          <span ng-repeat="subtype in subtypes">
+            <span ng-if="weapon.sub_type_id == subtype.subtype_id">
+              {{subtype.name}}
+            </span>
+          </span>
+        </td>
+        <td>{{weapon.max_offer_unit_price}}</td>
+        <td>{{weapon.min_sale_unit_price}}</td>
+        <td>{{weapon.profit_margin}}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <p>Pages {{pages}}</p>
+    <button class="btn" ng-click='previousPage()'>Previous</button>
+    <button class="btn" ng-click="nextPage()">Next</button>
+  </div>
+  <br>
+</div>

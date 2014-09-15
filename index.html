@@ -1,0 +1,23 @@
+<html ng-app="gw2Items">
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="css/application.css">
+
+  <title>Guild Wars 2 Weapon Price Checker</title>
+</head>
+<body ng-controller="mainController">
+  <h1>Guild Wars 2 Item Search</h1>
+    <ul class="nav nav-pills">
+      <li><a href="#">Home</a></li>
+      <li><a href="#weapons">Weapons</a></li>
+    </ul>
+    <br>
+  <div id="main">
+    <div ng-view></div>
+  </div>
+</body>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+  <script src="script.js"></script>
+</html>
