@@ -1,0 +1,49 @@
+  <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3>{{weaponDetail.name}}</h3>
+  </div>
+  <div class="panel-body">
+      <div class="col-lg-3">
+        <ul>
+          <li>Level: {{weaponDetail.level}}</li>
+          <li>Type: {{weaponDetail.type}}/{{weaponDetail.weapon.type}}</li>
+          <li>Rarity: {{weaponDetail.rarity}}</li>
+          <li>Vendor Value: {{weaponDetail.vendor_value}}
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <ul>
+          <li>Damage Type: {{weaponDetail.weapon.damage_type}}</li>
+          <li>Minimum Power: {{weaponDetail.weapon.min_power}}</li>
+          <li>Maximum Power: {{weaponDetail.weapon.max_power}}</li>
+          <li>Defense: {{weaponDetail.weapon.defense}}</li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <li>Attributes:
+        <li ng-repeat="attribute in attributes">{{attribute.attribute}}: {{attribute.modifier}}
+        </li>
+        </li>
+      </div>
+      <div class="col-lg-3">
+        <li>Buy Price: {{historyData.max_offer_unit_price}}</li>
+        <li>Sell Price: {{historyData.min_sale_unit_price}}</li>
+        <li>Profit Margin: {{historyData.profit_margin}}</li>
+      </div>
+  <div class="col-sm-9">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Price History</h4></div>
+      <div class="panel">
+        <canvas linechart responsive="true" options="options" data="linechart" width="500" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Buyers vs Sellers</h4></div>
+      <div class="panel">
+        <canvas piechart responsive="true" options="options" data="piechart" width="200" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
