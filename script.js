@@ -89,23 +89,23 @@
           labels: $scope.date_list,
           datasets: [
             {
-                label: "Sale Price",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
+                label: "Sell Price",
+                fillColor : "rgba(86,118,247,0.2)",
+                strokeColor : "rgba(86,118,247,1)",
+                pointColor : "rgba(86,118,247,1)",
+                pointStrokeColor : "#fff",
+                pointHighlightFill : "#fff",
+                pointHighlightStroke : "rgba(86,118,247,1)",
                 data: $scope.sale_price_list
             },
             {
                 label: "Buy Price",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
+                fillColor : "rgba(51,51,44,0.2)",
+                strokeColor : "rgba(51,51,44,1)",
+                pointColor : "rgba(51,51,44,1)",
+                pointStrokeColor : "#fff",
+                pointHighlightFill : "#fff",
+                pointHighlightStroke : "rgba(51,51,44,1)",
                 data: $scope.offer_price_list
             }
           ]
@@ -114,14 +114,14 @@
         $scope.piechart = [
             {
                 value: $scope.historyData.offer_availability,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
+                color: "#b32e1f",
+                highlight: "#e84735",
                 label: "Demand"
             },
             {
                 value: $scope.historyData.sale_availability,
-                color: "#FDB45C",
-                highlight: "#FFC870",
+                color: "#5676f7",
+                highlight: "#8ca2f7",
                 label: "Supply"
             }
         ]
