@@ -19,48 +19,43 @@
         templateUrl : 'partials/weapon_detail.html',
         controller  : 'weaponDetailController'
       })
+
+      .otherwise({
+                redirectTo:'/'
+      });
   });
 
   // create the controllers and inject Angular's $scope
-  gw2Items.controller('mainController', function($scope, $http) {
-    // create a message to display in our view
-    var response = $http.get("http://www.gw2spidy.com/api/v0.9/json/gem-price");
-    response.success(function(data, status, headers, config) {
-      console.log(data)
+  gw2Items.controller('mainController', ['$scope','Datasource','$http',function($scope, Datasource, $http) {
+
+    Datasource.getGems(function(data) {
       $scope.quantity = data.result;
-    })
-  });
+    }, $http);
+  }]);
 
-  gw2Items.controller('weaponController', ['$scope', '$http',function($scope, $http) {
-    $scope.main = { page: 1 };
+  gw2Items.controller('weaponController', ['$scope', 'Datasource', '$http',function($scope, Datasource, $http) {
 
-    //build initial page load
-    var response = $http.get("http://tkl.dnsdynamic.com:3000/weapons");
+    //initialize page if its null
+    if($scope.main == null) {
+      $scope.main = { page: 1 };
+    }
 
-    response.success(function(data, status, headers, config) {
+    $scope.loadPage = function() {
+      Datasource.getWeapons(function(data) {
         $scope.weapons = data.weapon_list;
-        $scope.pages = data.pages;
+        $scope.main.totalPages = data.pages;
+        $scope.main.page = data.current_page;
         $scope.rares = data.rare;
         $scope.types = data.type;
         $scope.subtypes = data.subtype;
-    });
-
-    response.error(function(data, status, headers, config) {
-        alert("AJAX failed!");
-    });
-
-    //build function to trigger next page of data
-    $scope.loadPage = function() {
-      $http.get("http://tkl.dnsdynamic.com:3000/weapons?page=" + $scope.main.page).success(function(data, status, headers, config) {
-          $scope.weapons = data.weapon_list;
-      });
+      }, $scope.main.page, $http);
     };
 
     //increment page
     $scope.nextPage = function() {
-        if ($scope.main.page < $scope.main.pages) {
+        if ($scope.main.page < $scope.main.totalPages) {
             $scope.main.page++;
-            $scope.loadPage();
+            $scope.loadPage($scope.main.page);
         }
     };
 
@@ -68,19 +63,22 @@
     $scope.previousPage = function() {
         if ($scope.main.page > 1) {
             $scope.main.page--;
-            $scope.loadPage();
+            $scope.loadPage($scope.main.page);
         }
     };
+
+    //initial load
+    if($scope.weapons == null) {
+        $scope.loadPage();
+    }
   }]);
 
-  gw2Items.controller('weaponDetailController', function($scope, $http, $routeParams) {
+  gw2Items.controller('weaponDetailController', ['$scope', '$http', 'Datasource', '$routeParams', function($scope, $http, Datasource, $routeParams) {
     $scope.id = $routeParams.id;
 
-    var itemHistory = $http.get("http://tkl.dnsdynamic.com:3000/weapons/" + $scope.id);
-
-    itemHistory.success(function(data, status, headers, config) {
+    //Grab Chart Data
+    Datasource.getWeaponCharts(function(data) {
         $scope.historyData = data.weapon[0];
-        console.log($scope.historyData)
         $scope.date_list = data.lineChart.date_list.reverse();
         $scope.sale_price_list = data.lineChart.sale_price_list.reverse();
         $scope.offer_price_list = data.lineChart.offer_price_list.reverse();
@@ -124,30 +122,21 @@
                 highlight: "#8ca2f7",
                 label: "Supply"
             }
-        ]
+        ];
 
-    });
+    }, $scope.id, $http);
 
-    itemHistory.error(function(data, status, headers, config) {
-        alert("AJAX failed!");
-    });
-
-    var itemDetail = $http.get("https://api.guildwars2.com/v1/item_details.json?item_id=" + $scope.id);
-
-    itemDetail.success(function(data, status, headers, config) {
-        console.log(data)
+    //Grab Weapon Details
+    Datasource.getWeaponDetails(function(data){
         $scope.weaponDetail = data;
         $scope.attributes = data.weapon.infix_upgrade.attributes;
-    });
+    }, $scope.id, $http);
 
-    itemDetail.error(function(data, status, headers, config) {
-        alert("AJAX failed!");
-    });
-
+    //Chart Options
     $scope.options = {
       animation: true,
       animationSteps: 60,
       responsive: true
     };
 
-  });
+  }]);
