@@ -37,14 +37,35 @@
             </span>
           </span>
         </td>
-        <td>{{weapon.max_offer_unit_price}}</td>
-        <td>{{weapon.min_sale_unit_price}}</td>
-        <td>{{weapon.profit_margin}}</td>
+        <td>
+          {{Currency.calcGold(weapon.max_offer_unit_price)}}
+          <img src="../images/gold.png">
+          {{Currency.calcSilver(weapon.max_offer_unit_price)}}
+          <img src="../images/silver.png">
+          {{Currency.calcCopper(weapon.max_offer_unit_price)}}
+          <img src="../images/copper.png">
+        </td>
+        <td>
+          {{Currency.calcGold(weapon.min_sale_unit_price)}}
+          <img src="../images/gold.png">
+          {{Currency.calcSilver(weapon.min_sale_unit_price)}}
+          <img src="../images/silver.png">
+          {{Currency.calcCopper(weapon.min_sale_unit_price)}}
+          <img src="../images/copper.png">
+        </td>
+        <td>
+          {{Currency.calcGold(weapon.profit_margin)}}
+          <img src="../images/gold.png">
+          {{Currency.calcSilver(weapon.profit_margin)}}
+          <img src="../images/silver.png">
+          {{Currency.calcCopper(weapon.profit_margin)}}
+          <img src="../images/copper.png">
+        </td>
       </tr>
     </table>
   </div>
   <div>
-    <p>Pages {{pages}}</p>
+    <p>Page {{main.page}} of {{main.totalPages}}</p>
     <button class="btn" ng-click='previousPage()'>Previous</button>
     <button class="btn" ng-click="nextPage()">Next</button>
   </div>

@@ -26,3 +26,19 @@ gw2Items.factory('Datasource',
     };
   }
 );
+
+gw2Items.factory('Currency',
+  function() {
+    return {
+      calcGold:function(value) {
+        return Math.floor(value/10000);
+      },
+      calcSilver:function(value) {
+        return Math.floor((value - (Math.floor(value/10000) * 10000))/100);
+      },
+      calcCopper:function(value) {
+        return value - (Math.floor(value/10000) * 10000) - Math.floor((value - (Math.floor(value/10000) * 10000))/100)*100;
+      }
+    };
+  }
+);

@@ -1,6 +1,8 @@
   <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h3>{{weaponDetail.name}}</h3>
+  <div class="panel-heading">
+      <img src="{{historyData.img}}">
+      <h3 style="display: inline;">&nbsp&nbsp{{weaponDetail.name}}</h3>
   </div>
   <div class="panel-body">
       <div class="col-lg-3">
@@ -26,9 +28,33 @@
         </li>
       </div>
       <div class="col-lg-3">
-        <li>Buy Price: {{historyData.max_offer_unit_price}}</li>
-        <li>Sell Price: {{historyData.min_sale_unit_price}}</li>
-        <li>Profit Margin: {{historyData.profit_margin}}</li>
+        <li>
+          <strong>Buy Price: </strong>
+          {{Currency.calcGold(historyData.max_offer_unit_price)}}
+          <img src="../images/gold.png">
+          {{Currency.calcSilver(historyData.max_offer_unit_price)}}
+          <img src="../images/silver.png">
+          {{Currency.calcCopper(historyData.max_offer_unit_price)}}
+          <img src="../images/copper.png">
+        </li>
+        <li>
+          <strong>Sell Price: </strong>
+          {{Currency.calcGold(historyData.min_sale_unit_price)}}
+          <img src="../images/gold.png">
+          {{Currency.calcSilver(historyData.min_sale_unit_price)}}
+          <img src="../images/silver.png">
+          {{Currency.calcCopper(historyData.min_sale_unit_price)}}
+          <img src="../images/copper.png">
+        </li>
+        <li>
+          <strong>Profit Margin: </strong>
+          {{Currency.calcGold(historyData.profit_margin)}}
+          <img src="../images/gold.png">
+          {{Currency.calcSilver(historyData.profit_margin)}}
+          <img src="../images/silver.png">
+          {{Currency.calcCopper(historyData.profit_margin)}}
+          <img src="../images/copper.png">
+        </li>
       </div>
   <div class="col-sm-9">
     <div class="panel panel-default">

@@ -33,7 +33,7 @@
     }, $http);
   }]);
 
-  gw2Items.controller('weaponController', ['$scope', 'Datasource', '$http',function($scope, Datasource, $http) {
+  gw2Items.controller('weaponController', ['$scope', 'Datasource','Currency', '$http',function($scope, Datasource, Currency, $http) {
 
     //initialize page if its null
     if($scope.main == null) {
@@ -49,6 +49,7 @@
         $scope.types = data.type;
         $scope.subtypes = data.subtype;
       }, $scope.main.page, $http);
+      $scope.Currency = Currency;
     };
 
     //increment page
@@ -73,9 +74,9 @@
     }
   }]);
 
-  gw2Items.controller('weaponDetailController', ['$scope', '$http', 'Datasource', '$routeParams', function($scope, $http, Datasource, $routeParams) {
+  gw2Items.controller('weaponDetailController', ['$scope', '$http', 'Datasource','Currency','$routeParams', function($scope, $http, Datasource, Currency, $routeParams) {
     $scope.id = $routeParams.id;
-
+    $scope.Currency = Currency;
     //Grab Chart Data
     Datasource.getWeaponCharts(function(data) {
         $scope.historyData = data.weapon[0];
